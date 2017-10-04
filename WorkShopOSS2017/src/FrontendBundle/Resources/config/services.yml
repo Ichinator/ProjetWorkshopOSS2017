@@ -1,4 +1,9 @@
+parameters:
+    JSONParser: \FrontendBundle\Parser\JSONparser
+
 services:
+    FrontendBundle.Parser:
+        class: "%JSONParser%"
 #    frontend.example:
 #        class: FrontendBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
