@@ -1,9 +1,22 @@
 parameters:
     JSONParser: \FrontendBundle\Parser\JSONparser
+    XMLParser: \FrontendBundle\Parser\XMLParser
+    cURL: \FrontendBundle\Parser\cURL
+    ArrayProcessing: \FrontendBunlde\Parser\ArrayProcessing
 
 services:
     FrontendBundle.Parser:
         class: "%JSONParser%"
+
+    FrontendBundle.XMLParser:
+        class: "%XMLParser%"
+
+    FrontendBundle.cURL:
+        class: "%cURL%"
+
+    FrontendBundle.ArrayProcessing:
+        class: "%ArrayProcessing%"
+
 #    frontend.example:
 #        class: FrontendBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
