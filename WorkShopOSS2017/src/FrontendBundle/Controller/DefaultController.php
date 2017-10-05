@@ -5,17 +5,23 @@ namespace FrontendBundle\Controller;
 use FrontendBundle\Parser\XMLParser;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\HttpFoundation\Request;
 use FrontendBundle\Parser\JSONparser;
 
 class DefaultController extends Controller
 {
     public function indexAction(Request $request){
-        //$defaultData = array('message' => 'Type your message here');
         $form = $this->createFormBuilder()
-            ->add('Links', TextType::class)
+            ->add('Links', CollectionType::class, array(
+                'entry_type'   => UrlType::class,
+                'prototype' => true,
+                'allow_add' => true,
+                'entry_options'  => array(
+                    'attr'      => array('class' => 'email-box')
+                ),))
             ->add('Category', ChoiceType::class, array('choices'  => array(
                 'XML' => 'XML',
                 'JSON' => 'JSON',
@@ -28,22 +34,26 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
+            $links = $data['Links'];
+            $countLinks = count($links);
+
             if ($data['Category'] == 'XML'){
                 $resultsComplete = array_map('array_merge', XMLParser::getSamples());
             }elseif ($data['Category'] == 'JSON'){
-                //TODO: Change these demonstration link by foreach on $data['Links']
-                $links = $data['Links'];
-                $countLinks = count($links);
-                for ($i = 0; $i < $countLinks; $i++){
-                    if ($i == 0){
-                        $array1 = json_decode(file_get_contents($links[$i]), true);
-                    }else{
-                        $resultsComplete = JSONparser::mergePerKey($array1, $links[$i]);
+                if (is_array($links) && count($links) >= 2) {
+                    for ($i = 0; $i < $countLinks; $i++) {
+                        if ($i == 0) {
+                            $array1 = json_decode(file_get_contents($links[$i]), true);
+                        } else {
+                            $resultsComplete = JSONparser::mergePerKey($array1, $links[$i]);
+                        }
                     }
+                }else{
+                    $jsonTestFromAllocine = json_decode(file_get_contents('./testallocine.json'), true);
+                    $jsonTestFromImdb = json_decode(file_get_contents('./testimdb.json'), true);
+                    $resultsComplete = JSONparser::mergePerKey($jsonTestFromAllocine, $jsonTestFromImdb);
                 }
-                //$jsonTestFromAllocine = json_decode(file_get_contents('./testallocine.json'), true);
-                //$jsonTestFromImdb = json_decode(file_get_contents('./testimdb.json'), true);
-                //$resultsComplete = JSONparser::mergePerKey($jsonTestFromAllocine, $jsonTestFromImdb);
+
             }else{
                 $resultsComplete = array("A Venir..." => "En cours");
             }

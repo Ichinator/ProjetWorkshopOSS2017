@@ -2,7 +2,43 @@
 <h1>TEST FORMULAIRE DE RECUPERATION LIEN API/CRM/SAP:</h1>
 
 {{ form_start(form) }}
+{{ form_widget(form.Category) }}
+<ul id="link-fields-list"
+    data-prototype="{{ form_widget(form.Links.vars.prototype)|e }}">
+    {% for linkField in form.Links %}
+        <li>
+            {{ form_errors(linkField) }}
+            {{ form_widget(linkField) }}
+        </li>
+    {% endfor %}
+</ul>
+
+<a href="#" id="add-another-link">Add another Link</a><br />
 {{ form_end(form) }}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.js"
+        integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    var linkCount = '{{ form.Links|length }}';
+
+    jQuery(document).ready(function() {
+        jQuery('#add-another-link').click(function(e) {
+            e.preventDefault();
+
+            var linkList = jQuery('#link-fields-list');
+
+            var newWidget = linkList.attr('data-prototype');
+            newWidget = newWidget.replace(/__name__/g, linkCount);
+            linkCount++;
+
+            // create a new list element and add it to the list
+            var newLi = jQuery('<li></li>').html(newWidget);
+            newLi.appendTo(linkList);
+        });
+    })
+</script>
 
 
 </body>
