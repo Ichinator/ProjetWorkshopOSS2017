@@ -110,10 +110,9 @@ class DefaultController extends Controller
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData();
 
-
-
             $this->xmltest();
 
+            $jsonTestFromAllocine = json_decode(file_get_contents('./testallocine.json'), true);
             $jsonTestFromImdb = json_decode(file_get_contents('./testimdb.json'), true);
             //$jsonTest = json_decode(file_get_contents('./photos.json'), true);
             $resultsName1 = JSONparser::JSONParserGetName($jsonTestFromAllocine, $keys = array());
