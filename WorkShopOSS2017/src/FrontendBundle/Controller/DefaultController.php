@@ -50,6 +50,7 @@ class DefaultController extends Controller
                     echo '|--> '.$jsonTestLines;
                 }
 
+
                 if (is_array($jsonTestLinesValues))
                     $this->jsonProcessingRec($jsonTestLinesValues,1);
                 else{
@@ -94,6 +95,7 @@ class DefaultController extends Controller
             }
     }
 
+
     public function indexAction(Request $request)
     {
         //$defaultData = array('message' => 'Type your message here');
@@ -108,23 +110,21 @@ class DefaultController extends Controller
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData();
 
-/*
-            //$jsonTest = json_decode(file_get_contents($data["Link"]), true);
-            $jsonTestFromAllocine = json_decode(file_get_contents('./testallocine.json'), true);
-            $jsonTestFormImdb = json_decode(file_get_contents('./testimdb.json'), true);
 
-            $jsonTest = array_merge($jsonTestFromAllocine,$jsonTestFormImdb);
+
+            $this->xmltest();
+
+            $jsonTestFromImdb = json_decode(file_get_contents('./testimdb.json'), true);
             //$jsonTest = json_decode(file_get_contents('./photos.json'), true);
-            //$keys1 = JSONparser::JSONParserGetName($jsonTestFromAllocine);
-            //$keys2 = JSONparser::JSONParserGetName($jsonTestFormImdb);
-            $keys = JSONparser::JSONParserGetName($jsonTest);
+            $resultsName1 = JSONparser::JSONParserGetName($jsonTestFromAllocine, $keys = array());
+            $resultsName2 = JSONparser::JSONParserGetName($jsonTestFromImdb, $keys = array());
+            $resultsName3 = array_map('array_merge', $resultsName1, $resultsName2);
+            $resultsComplete = array_map('array_merge', $jsonTestFromAllocine, $jsonTestFromImdb);
 
-            //$keys = array_merge($keys1, $keys2);
-            echo '<pre>';
-                var_dump($keys);
-            echo '</pre>';
-*/
-        $this->xmltest();
+
+            return $this->render('FrontendBundle:Default:result.html.twig', array('resultsName' => $resultsName3,
+                                                                                       'results' => $resultsComplete));
+
         }
         return $this->render('FrontendBundle:Default:index.html.twig', array('form' => $form->createView()));
     }
