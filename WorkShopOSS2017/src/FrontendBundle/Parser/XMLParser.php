@@ -164,4 +164,58 @@ class XMLParser{
         }
         return self::$xml;
     }
+
+    public static function xmltest(){
+        $tstart = microtime(true);
+
+        $xmlsamples = XMLParser::getSamples();
+        $xmltest = array_merge($xmlsamples);
+
+        $tend = microtime(true);
+
+
+
+        dump( ArrayProcessing::mergeSameKeys($xmltest));
+        //dump(   (array_intersect_ukey($xmltest[0],$xmltest[1],'self::emptyKeyValue'))  );
+
+
+        echo 'exec : '.($tend-$tstart).'<br/>';
+        $switch = false;
+        if(false)
+            if(!$switch)
+                foreach ($xmltest as $jsonTestLines => $jsonTestLinesValues){
+                    if (is_array($jsonTestLines)){
+                        //var_dump(array_diff_key($jsonSample2,$jsonTestLines));
+                        echo '|--> '.$jsonTestLines.'<br />';
+                    }else{
+                        echo '|--> '.$jsonTestLines;
+                    }
+
+
+                    if (is_array($jsonTestLinesValues))
+                        self::jsonProcessingRec($jsonTestLinesValues,1);
+                    else{
+                        echo '::: '.$jsonTestLinesValues.'<br />';
+                    }
+                    echo '<br />';
+                }
+
+        if($switch) {
+            $keys = JSONparser::JSONParserGetName($xmltest);
+            echo '<pre>';
+            var_dump($keys);
+            echo '</pre>';
+        }
+    }
+
+    public static function jsonProcessingRec(array &$jsonNode, $level = 0, &$limit = 128){
+        if( $level < $limit && is_int($level) && is_int($limit) )
+            foreach ($jsonNode as $jsonChildrenKey => $jsonChildrenValue){
+                echo '|--'.str_repeat('-',$level*2).'> '.$jsonChildrenKey;
+                if (is_array($jsonChildrenValue))
+                    self::jsonProcessingRec($jsonChildrenValue,$level+1,$limit);
+                else
+                    echo '::: '.$jsonChildrenValue.'<br />';
+            }
+    }
 }

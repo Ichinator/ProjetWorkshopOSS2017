@@ -26,11 +26,19 @@ class JSONparser
     public static function mergePerKey($array1,$array2){
         $mergedArray = [];
         foreach ($array1 as $key => $value) {
-            if(isset($array2[$key])){
-                $mergedArray[$value] = null;
+            if(isset($array2[$key]) && !empty($value)){
+                if (is_array($value)){
+                    $mergedArray[] = array_merge_recursive($value, $mergedArray);
+                }else{
+                    $mergedArray[$value] = null;
+                }
                 continue;
             }
-            $mergedArray[$value] = $array2[$key];
+            if (!is_array($value)){
+                $mergedArray[$value] = $array2[$key];
+            }else{
+                $mergedArray[] = array_merge_recursive($array2[$key], $mergedArray);
+            }
         }
         return $mergedArray;
     }
