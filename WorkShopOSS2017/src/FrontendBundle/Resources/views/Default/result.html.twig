@@ -1,0 +1,29 @@
+<body>
+<h1>TEST FORMULAIRE DE RECUPERATION LIEN API/CRM/SAP:</h1>
+
+{% macro show_result(results) %}
+<table style="border: 1px dashed lightgrey">
+    {% for key,value in results %}
+        <tr>
+            <td style="border: 1px dashed grey">{{ key }}</td>
+            {% if value is defined %}
+                {% if value is iterable %}
+                    <td style="border: 1px dashed lightgrey">{{ _self.show_result(value) }}</td>
+                {% else %}
+                    <td style="border: 1px dashed lightgrey">{{ value }}</td>
+                {% endif %}
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+{% endmacro %}
+
+{% import _self as macros %}
+
+{% if results|length != 0 %}
+    {{ macros.show_result(results) }}
+{% else %}
+    Aucun resultat retourné
+{% endif %}
+
+</body>
