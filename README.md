@@ -1,5 +1,5 @@
 # CENTRALiZE !
-Ce projet est issu d'un **WorkShop de l'Ecole OSS Montpellier**, celui-ci permet de centraliser, comme son nom l'indique, diverses sourecs de données provenant d'APi et/ou de CRM.
+Ce projet est issu d'un **WorkShop de l'Ecole OSS Montpellier**, celui-ci permet de centraliser, comme son nom l'indique, diverses sources de données provenant d'APi et/ou de CRM.
 
 Grace à celui-ci vous pourrez fusionner vos sources quelles qu'elles soient, et ne vous servir plus que d'un seul et unique flux de données.
 
@@ -14,3 +14,9 @@ Ne vous souciez plus de traitez une multitude de format afin de parser vos donn�
 ![Image of Centralize!](https://github.com/Ichinator/ProjetWorkshopOSS2017/blob/master/WorkShopOSS2017/web/apistoapi.png?raw=true)
 
 Grace à votre compte personnel vous aurez accés à vos propre liens contenant vos clef API. Si vous ne possedez pas de compte vous n'aurez accés qu'u differentes APi publiques disponibles.
+
+##TODOLiST
+* Checking de l'extension du fichier fourni
+* Possibilitées d'upload de fichier JSON, XML & XLS
+* Partie Utilisateurs
+  * Possibilité d'enregistrer ses liens API
