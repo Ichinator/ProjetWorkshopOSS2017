@@ -11,6 +11,6 @@ Notre Middleware agit tel un "entonoir" dans lequel vous pourrez ajouter toutes 
 
 Ne vous souciez plus de traitez une multitude de format afin de parser vos données, gagnez du temps et gagnez en efficacitée.
 
-![Image of Centralize!]()
+![Image of Centralize!](https://github.com/Ichinator/ProjetWorkshopOSS2017/blob/master/WorkShopOSS2017/web/apistoapi.png?raw=true)
 
 Grace à votre compte personnel vous aurez accés à vos propre liens contenant vos clef API. Si vous ne possedez pas de compte vous n'aurez accés qu'u differentes APi publiques disponibles.
