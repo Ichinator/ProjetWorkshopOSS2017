@@ -16,7 +16,9 @@ Ne vous souciez plus de traitez une multitude de format afin de parser vos donn�
 Grace à votre compte personnel vous aurez accés à vos propre liens contenant vos clef API. Si vous ne possedez pas de compte vous n'aurez accés qu'u differentes APi publiques disponibles.
 
 ##TODOLiST
-* Checking de l'extension du fichier fourni
-* Possibilitées d'upload de fichier JSON, XML & XLS
-* Partie Utilisateurs
-  * Possibilité d'enregistrer ses liens API
+
+- [x] Parsing des differents format de fichiers
+- [ ] Checking de l'extension du fichier fourni
+- [ ] Possibilitées d'upload de fichier JSON, XML & XLS
+- [ ] Partie Utilisateurs
+- [ ] Possibilité d'enregistrer ses liens API
