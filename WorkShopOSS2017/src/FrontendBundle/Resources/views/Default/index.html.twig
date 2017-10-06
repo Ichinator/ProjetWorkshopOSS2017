@@ -6,7 +6,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}"/>
 </head>
 <body>
-<h1>TEST FORMULAIRE DE RECUPERATION LIEN API/CRM/SAP:</h1>
+<div class="container">
+    <div class="jumbotron">
+        <h1>CENTRALiZE</h1>
+        <p>Nous centralizons vos données pour vous</p>
+    </div>
+
 
 {{ form_start(form) }}
 <ul id="link-fields-list"
@@ -23,7 +28,7 @@
 {{ form_widget(form.Category, {"attr": {"class": "btn btn-default"}} ) }}&nbsp;&nbsp;
 {{ form_widget(form.send, {"attr": {"class": "btn btn-primary"}} ) }}
 {{ form_end(form) }}
-
+</div>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 
 <script type="text/javascript">
